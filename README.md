@@ -39,7 +39,7 @@ const arrayMin = arr => Math.min(...arr);
 `Array.protype.slice()`可以把原数组切割成指定的长度。
 ```js
 const chunk = (arr,size) => 
-   Array.from({length: Math.ceil( arr.length / size )}, ( value,index ) => arr.slice( index * size, index * size +size ));
+   Array.from({length: Math.ceil(arr.length / size)},(value,index) => arr.slice(index * size, index * size + size));
 //chunk([1,2,3,4,5],2) ->[[1,2],[3,4],[5]]
 ```
 [回到目录](#目录)
