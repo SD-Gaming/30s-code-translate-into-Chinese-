@@ -2,7 +2,7 @@
 本文经过个人的翻译，翻译自《30-seconds-of-code》，原作者Chalarangelo，收集了有用的 JavaScript 代码片段。
 
 
-# 目录
+# Content
 ## Array
 * [`arrayMax`](#arrayMax)
 * [`arrayMin`](#arrayMin)
@@ -17,14 +17,16 @@
    const arrayMax = arr => Math.max(...arr);
    // arrayMax([10, 1, 5]) -> 10
 ```
-[回到目录](#目录）
+
+[回到目录](#Content）
 
 ### arrayMin
 
 返回一个数组中最小的数值。
 使用扩展运算符展开数组，使用`Math.min()`找出最小数。
-```
+```js
   const arrayMin = arr => Math.min(...arr);
   // arrayMin([10, 1, 5]) -> 1
 ```
-[回到目录](#目录）
+
+[回到目录](#Content）
