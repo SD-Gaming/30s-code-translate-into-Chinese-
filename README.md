@@ -2,7 +2,7 @@
 本文经过个人的翻译，翻译自《30-seconds-of-code》，原作者Chalarangelo，收集了有用的 JavaScript 代码片段。
 
 
-# Contents
+# 目录
 ## Array
 * [`arrayMax`](#arrayMax)
 * [`arrayMin`](#arrayMin)
@@ -18,7 +18,7 @@
    // arrayMax([10, 1, 5]) -> 10
 ```
 
-[回到目录](#Contents）
+[回到目录](#目录)
 
 ### arrayMin
 
@@ -29,4 +29,4 @@
   // arrayMin([10, 1, 5]) -> 1
 ```
 
-[回到目录](#Contents）
+[回到目录](#目录)
