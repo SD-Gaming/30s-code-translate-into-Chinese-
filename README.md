@@ -13,14 +13,14 @@
 * [arrayMax](#arrayMax)
 * [arrayMin](#arrayMin)
 * [chunk](#chunk)
+* [compact](#compact)
+* [countOccurrences](#countOccurrences)
 
 ## Array
 
 ### arrayGCD
 
-计算一个纯数字数组的最大公约数。
-
-
+计算一个纯数字数组的最大公约数。  
 **最大公约数**是几个自然数之间最大的能被除尽，也就是没有余数的数，比如`9,36`，最大公约数是`9`。  
 首先定义`Array.prototype.reduce()`方法的回调函数`gcd`,该函数采用递归的方式，可以处理两个自然数，得出最大公约数。  
 然后可以使用这个回调函数，处理任意只含数字的数组了，其中的形参`a`是上次运算得出的最大公约数，形参`b`是当前正在处理的元素。  
@@ -86,3 +86,25 @@ const chunk = (arr,size) =>
 //chunk([1,2,3,4,5],2) ->[[1,2],[3,4],[5]]
 ```
 [回到目录](#目录)
+
+### compact
+去除不需要的元素。  
+使用`Array.prototype.filter()`过滤掉不需要的元素（`null`,`undefined`,`""`,`false`,`NaN`）。
+```js
+const compact = arr => arr.filter(Boolean);     //Boolean为布尔值对象包装器的函数指针
+// compact([0, 1, false, 2, '', 3, 'a', 'e'*23, NaN, 's', 34]) -> [ 1, 2, 3, 'a', 's', 34 ]
+```
+[回到目录](#目录)
+
+### countOccurrences
+对数组中出现相同元素个数进行计数。  
+使用`Array.prototype.filter()`，每当遇到数组中指定元素，则进行计数。  
+```js
+const countOccurrences = (arr,value) => arr.reduce((accumulator,currentValue) => currentValue === value? accumulator + 1 : accumulator + 0, 0);    
+// countOccurrences([1,1,2,1,2,3], 1) -> 3 
+```
+[回到目录](#目录)
+
+### deepFlatten
+对数组降维。*似乎不是很合适的翻译*   
+
