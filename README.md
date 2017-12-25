@@ -102,8 +102,8 @@ const compact = arr => arr.filter(Boolean);     //Boolean为布尔值对象包�
 [回到目录](#目录)
 
 ### countOccurrences
-对数组中出现相同元素个数进行计数。  
-使用`Array.prototype.filter()`，每当遇到数组中指定元素，则进行计数。  
+对数组中出现相同元素个数进行计数。  
+使用`Array.prototype.filter()`，每当遇到数组中指定元素，则进行计数。   
 ```js
 const countOccurrences = (arr,value) => arr.reduce((accumulator,currentValue) => currentValue === value? accumulator + 1 : accumulator + 0, 0);    
 // countOccurrences([1,1,2,1,2,3], 1) -> 3 
