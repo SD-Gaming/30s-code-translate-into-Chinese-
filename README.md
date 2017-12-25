@@ -16,7 +16,13 @@
 * [compact](#compact)
 * [countOccurrences](#countOccurrences)
 * [deepFlatten](#deepFlatten)
-* [diffrence](#diffrence)
+* [difference](#difference)
+* [differenceWith](#differenceWith)
+* [distinceVlauesOfArray](#distinceVlauesOfArray)
+* [dropElements](#dropElments)
+* [dropRight](#dropRight)
+
+
 
 ## Array
 
@@ -34,7 +40,6 @@ const arrayGCD = arr => {
 // arrayGCD([1,2,3,4,5]) -> 1
 // arrayGCD([9,36,3]) -> 3
 ```
-
 [回到目录](#目录)
 
 ### arrayLCM
@@ -52,7 +57,6 @@ const arrayLCM = arr => {
 // arrayLCM([1,2,3,4,5]) -> 60
 // arrayLCM([9,36,3]) -> 36
 ```
-
 [回到目录](#目录)
 
 ### arrayMax
@@ -63,7 +67,6 @@ const arrayLCM = arr => {
 const arrayMax = arr => Math.max(...arr);
 // arrayMax([10, 1, 5]) -> 10
 ```
-
 [回到目录](#目录)
 
 ### arrayMin
@@ -74,7 +77,6 @@ const arrayMax = arr => Math.max(...arr);
 const arrayMin = arr => Math.min(...arr);
 // arrayMin([10, 1, 5]) -> 1
 ```
-
 [回到目录](#目录)
 
 ### chunk
@@ -85,10 +87,9 @@ const arrayMin = arr => Math.min(...arr);
 第二个参数——回调函数里的`Array.protype.slice()`可以把原数组切割成指定的长度。  
 ```js
 const chunk = (arr,size) => 
-   Array.from({length: Math.ceil(arr.length / size)},(value,index) => arr.slice(index * size, index * size + size));
+   Array.from({length: Math.ceil(arr.length / size)},(val,index) => arr.slice(index * size, index * size + size));
 //chunk([1,2,3,4,5],2) ->[[1,2],[3,4],[5]]
 ```
-
 [回到目录](#目录)
 
 ### compact
@@ -98,33 +99,81 @@ const chunk = (arr,size) =>
 const compact = arr => arr.filter(Boolean);     //Boolean为布尔值对象包装器的函数指针
 // compact([0, 1, false, 2, '', 3, 'a', 'e'*23, NaN, 's', 34]) -> [ 1, 2, 3, 'a', 's', 34 ]
 ```
-
 [回到目录](#目录)
 
 ### countOccurrences
 对数组中出现相同元素个数进行计数。  
 使用`Array.prototype.filter()`，每当遇到数组中指定元素，则进行计数。   
 ```js
-const countOccurrences = (arr,value) => arr.reduce((accumulator,currentValue) => currentValue === value? accumulator + 1 : accumulator + 0, 0);    
+const countOccurrences = (arr,val) => arr.reduce((accumulator,currentVal) => currentVal === val? accumulator + 1 : accumulator + 0, 0);    
 // countOccurrences([1,1,2,1,2,3], 1) -> 3 
 ```
-
 [回到目录](#目录)
 
 ### deepFlatten
 对数组降维。  
 使用递归。使用`Array.prototype.concat()`把空数组（`[]`）和使用扩展运算符（`...`）展开降维处理的数组。递归的降维入参数组中的每一个元素。  
 ```js
-const deepFlatten = arr => [].concat(...arr.map(value => Array.isArray(value) ? deepFlatten(value) : value));
+const deepFlatten = arr => [].concat(...arr.map(val => Array.isArray(val) ? deepFlatten(val) : val));
 // deepFlatten([1,[2],[[3],4],5]) -> [1,2,3,4,5]
 ```
-
 [回到目录](#目录)
 
 ### different
 比较两个数组，返回一个目标数组之中没有的元素的数组。  
 使用`Array.prototype.filter()`方法，把`arr`数组中有，而`target`数组中没有的元素返回出来。  
 ```js
-const diffrence = (arr,target) => {const targetSet = new Set(target);return arr.filter(value => !targetSet.has(value))};
+const diffrence = (arr,target) => {const targetSet = new Set(target);return arr.filter(val => !targetSet.has(val))};
 // difference([1,2,3], [1,2,4]) -> [3]
 ```
+[回到目录](#目录)
+
+### differenceWith
+从一个数组过滤出比较函数没有返回`true`的所有值，作为数组返回。  
+使用`Array.prototype.find()`和`Array.prototype.filter()`方法找到合适的值。  
+```js
+const differenceWith = (arr, val, comp) => arr.filer(arrElement => !val.find(valElment => copm(arrElement, valElment)))
+// 从arr数组中找出与val数组中使用四舍五入比较不相等的元素。
+// differenceWith([1, 1.2, 1.5, 3], [1.9, 3], (a,b) => Math.round(a) == Math.round(b)) -> [1, 1.2]
+```
+[回到目录](#目录)
+
+### distinctValuesOfArray
+返回一个去除重复元素的新数组。  
+使用了ES6的`Set`和扩展语法（`...`）去除重复元素.  
+```js
+const distinctValuesOfArray = arr => [...new Set(arr)];
+// distinctValuesOfArray([1,2,2,3,4,4,5]) -> [1,2,3,4,5]
+```
+[回到目录](#目录)
+
+### dropElements
+去除掉一个数组内不满足条件函数的所有元素，并返回剩下的元素。  
+使用`Array.prototype.silce()`来切掉原数组上不满足条件的元素。  
+```js
+const dropElements = (arr,fuc) => {
+    while(arr.length > 0 && !func(arr[0])) {
+        arr = arr.silce(1);
+    } 
+    return arr;
+};
+// dropElements([1, 2, 3, 4], n => n >= 3) -> [3,4]
+```
+[回到目录](#目录)
+
+### dropRight
+返回一个移除`n`个右边元素的新数组。  
+使用`Array.prototype.silce()`方法来切除数组右边指定长度，默认切掉一个。  
+当`n = 0`时不做切除操作。  
+```js
+const dropRight = (arr, n = 1) => {
+    if(n === 0) return arr;
+    return arr.slice(0,-n);
+}
+//我加入了切掉0个数组的情况
+//dropRight([1,2,3], 0) -> []
+//dropRight([1,2,3]) -> [1,2]
+//dropRight([1,2,3], 2) -> [1]
+//dropRight([1,2,3], 42) -> []
+```
+[回到目录](#目录)
