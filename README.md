@@ -15,6 +15,8 @@
 * [chunk](#chunk)
 * [compact](#compact)
 * [countOccurrences](#countOccurrences)
+* [deepFlatten](#deepFlatten)
+* [diffrence](#diffrence)
 
 ## Array
 
@@ -72,19 +74,21 @@ const arrayMax = arr => Math.max(...arr);
 const arrayMin = arr => Math.min(...arr);
 // arrayMin([10, 1, 5]) -> 1
 ```
+
 [回到目录](#目录)
 
 ### chunk
 
 把数组切割成指定长度的小块数组。  
-使用`Array.from`方法将伪数组和可迭代对象转化数组，该方法返回一个处理好的数组实例。  
-对于处理伪数组来说`Array.from`可接受两个参数，第一个为属性为`length`的对象，第二个可选参数是一个回调函数，用来处理被传进新数组的每个元素。  
+使用`Array.from()`方法将伪数组和可迭代对象转化数组，该方法返回一个处理好的数组实例。  
+对于处理伪数组来说`Array.from()`可接受两个参数，第一个为属性为`length`的对象，第二个可选参数是一个回调函数，用来处理被传进新数组的每个元素。  
 第二个参数——回调函数里的`Array.protype.slice()`可以把原数组切割成指定的长度。  
 ```js
 const chunk = (arr,size) => 
    Array.from({length: Math.ceil(arr.length / size)},(value,index) => arr.slice(index * size, index * size + size));
 //chunk([1,2,3,4,5],2) ->[[1,2],[3,4],[5]]
 ```
+
 [回到目录](#目录)
 
 ### compact
@@ -94,6 +98,7 @@ const chunk = (arr,size) =>
 const compact = arr => arr.filter(Boolean);     //Boolean为布尔值对象包装器的函数指针
 // compact([0, 1, false, 2, '', 3, 'a', 'e'*23, NaN, 's', 34]) -> [ 1, 2, 3, 'a', 's', 34 ]
 ```
+
 [回到目录](#目录)
 
 ### countOccurrences
@@ -103,8 +108,23 @@ const compact = arr => arr.filter(Boolean);     //Boolean为布尔值对象包�
 const countOccurrences = (arr,value) => arr.reduce((accumulator,currentValue) => currentValue === value? accumulator + 1 : accumulator + 0, 0);    
 // countOccurrences([1,1,2,1,2,3], 1) -> 3 
 ```
+
 [回到目录](#目录)
 
 ### deepFlatten
-对数组降维。*似乎不是很合适的翻译*   
+对数组降维。
+使用递归。使用`Array.prototype.concat()`把空数组（`[]`）和使用扩展运算符（`...`）展开降维处理的数组。递归的降维入参数组中的每一个元素。
+```js
+const deepFlatten = arr => [].concat(...arr.map(value => Array.isArray(value) ? deepFlatten(value) : value));
+// deepFlatten([1,[2],[[3],4],5]) -> [1,2,3,4,5]
+```
 
+[回到目录](#目录)
+
+### different
+比较两个数组，返回一个目标数组之中没有的元素的数组。
+使用`Array.prototype.filter()`方法，把`arr`数组中有，而`target`数组中没有的元素返回出来。
+```js
+const diffrence = (arr,target) => {const targetSet = new Set(target);return arr.filter(value => !targetSet.has(value))};
+// difference([1,2,3], [1,2,4]) -> [3]
+```
