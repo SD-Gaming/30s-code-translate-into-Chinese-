@@ -112,8 +112,8 @@ const countOccurrences = (arr,value) => arr.reduce((accumulator,currentValue) =>
 [回到目录](#目录)
 
 ### deepFlatten
-对数组降维。
-使用递归。使用`Array.prototype.concat()`把空数组（`[]`）和使用扩展运算符（`...`）展开降维处理的数组。递归的降维入参数组中的每一个元素。
+对数组降维。  
+使用递归。使用`Array.prototype.concat()`把空数组（`[]`）和使用扩展运算符（`...`）展开降维处理的数组。递归的降维入参数组中的每一个元素。  
 ```js
 const deepFlatten = arr => [].concat(...arr.map(value => Array.isArray(value) ? deepFlatten(value) : value));
 // deepFlatten([1,[2],[[3],4],5]) -> [1,2,3,4,5]
@@ -122,8 +122,8 @@ const deepFlatten = arr => [].concat(...arr.map(value => Array.isArray(value) ? 
 [回到目录](#目录)
 
 ### different
-比较两个数组，返回一个目标数组之中没有的元素的数组。
-使用`Array.prototype.filter()`方法，把`arr`数组中有，而`target`数组中没有的元素返回出来。
+比较两个数组，返回一个目标数组之中没有的元素的数组。  
+使用`Array.prototype.filter()`方法，把`arr`数组中有，而`target`数组中没有的元素返回出来。  
 ```js
 const diffrence = (arr,target) => {const targetSet = new Set(target);return arr.filter(value => !targetSet.has(value))};
 // difference([1,2,3], [1,2,4]) -> [3]
