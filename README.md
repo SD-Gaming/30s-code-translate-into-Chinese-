@@ -21,8 +21,10 @@
 * [distinceVlauesOfArray](#distinceVlauesOfArray)
 * [dropElements](#dropElments)
 * [dropRight](#dropRight)
-
-
+* [everyNth](#everyNth)
+* [filterNonUnique](#filterNonUnique)
+* [flatten](#flatten)
+* [flattenDepth](#flattenDepth)
 
 ## Array
 
@@ -177,3 +179,45 @@ const dropRight = (arr, n = 1) => {
 //dropRight([1,2,3], 42) -> []
 ```
 [回到目录](#目录)
+
+### everyNth
+返回数组内的N的倍数的元素。  
+使用`Array.prototype.filter()`方法包含给定数组的每一个N的倍数的元素的新数组。  
+```js
+const everyNth = (arr,nth) => arr.filter((element,index) => index % nth === nth - 1);
+// everyNth([1,2,3,4,5,6], 2) -> [ 2, 4, 6 ]
+```
+[回到目录](#目录)
+
+### filterNonUnique
+过滤掉数组内所有非唯一元素，返回一个没有过重复元素的新数组。  
+使用`Array.prototype.filter()`方法返回一个只有唯一值的新数组。  
+```js
+const filterNonUnique = arr => arr.filter(element => arr.indexOf(element) === arr.lastIndexOf(element));
+// filterNonUnique([1,2,2,3,4,4,5]) -> [1,3,5]
+```
+[回到目录](#目录)
+
+### flatten
+二维数组降维。  
+使用扩展运算符给二维数组展开为一维数组。这是一种浅降维方法，上文有深度降维法[deepFlatten](#deepFlatten)。
+```js
+const flatten = arr => [].concat(...arr);
+// flatten([1,[2],3,4]) -> [1,2,3,4]
+```
+[回到目录](#目录)
+
+### flattenDepth
+用给定的深度使数组降维。  
+使用递归，降低深度以1为每层单位。  
+使用`Array.prototype.reduce()`和`Array.prototype.concat()`方法来合并元素或数组。  
+基本情况下，深度层数等于1时不进行降维。省略第二个元素情况下，深度为1。  
+```js
+const flattenDepth = (arr,depth = 1) =>
+    depth != 1? arr.reduce((a, v) => a.concat(Array.isArray(v) ? flattenDepth(v, depth - 1) : v), [])
+    : : arr.reduce((a, v) => a.concat(v), []);
+// flattenDepth([1,[2],[[[3],4],5]], 2) -> [1,2,[3],4,5]    
+```
+[回到目录](#目录)
+
+
