@@ -4,7 +4,7 @@
 *翻译的同时加入了自己的理解，难免有疏漏，请多指教*
 
 
-*未完待续*
+*转载请注明原作者和译者。未完待续*
 
 # 目录
 ## Array
@@ -28,7 +28,10 @@
 * [groupBy](#groupBy)
 * [head](#head)
 * [initial](#initial)
-
+* [initialize2DArray](#initialize2DArray)
+* [initializeArrayWithValues](#initializeArrayWithValues)
+* [intersection](#intersection)
+* [last](#last)
 
 
 ## Array
@@ -253,6 +256,52 @@ const head = arr => arr[0];
 ```js
 const initial = arr => arr.slice(0,-1);
 // initial([1,2,3]) -> [1,2]
+```
+[回到目录](#目录)
+
+### initialize2DArray
+根据给定的元素长度，元素个数和元素值生成二维数组。       
+使用`Array.prototype.map()`方法生成`h`个长度为`w`、值为`val`的新数组，`val`默认值为`null`。    
+```js
+const initialize2DArray = (w,h,val = null) => new Array(h).fill().map(() => new Array(w).fill(val));    // 为方便阅读加入了new操作符
+// initializeArrayWithRange(2, 2, 0) -> [[0,0], [0,0]]
+```
+[回到目录](#目录)
+
+### initializeArrayWithRange
+生成一个包含`start`和`end`且指定范围的新数组。    
+使用`Array((end + 1) - start)`计算出想要的新数组长度，`Array.prototype.map`方法给新数组填充想要的范围内的值。      
+可以传入指定的`start`代替默认值。        
+```js
+const initializeArrayWithRange = (end,start = 0) => 
+    Array.from({ length:(end + 1) - start }).map((val,index) => index + start);
+// initializeArrayWithRange(5) -> [0,1,2,3,4,5]
+// initializeArrayWithRange(7, 3) -> [3,4,5,6,7]
+```
+[回到目录](#目录)
+
+### initializeArrayWithValues
+生成指定长度和值的数组。    
+用构造函数`new Array()`生成指定长度的空数组，再用`Array.prototype.fill()`方法填充指定的值。默认填充值为0。     
+```js
+const initializeArrayWithValues = (n,value = 0) => new Array(n).fill(value);
+// initializeArrayWithValues(5, 2) -> [2,2,2,2,2]
+```
+[回到目录](#目录)
+### intersection
+返回两个数组都有的元素集合。      
+创建`b`的`Set`对象，挑选出`a`数组内跟`b`数组所有相同的元素。       
+```js
+const intersection = (a,b) => {const bSet = new Set(b); return a.filter(x => bSet.has(x));};
+// intersection([1,2,3], [4,3,2]) -> [2,3]
+```
+[回到目录](#目录)
+
+###  last
+返回数组最后一个元素。     
+```js
+const last = arr => arr[arr.length - 1];
+// last([1,2,3]) -> 3
 ```
 [回到目录](#目录)
 
