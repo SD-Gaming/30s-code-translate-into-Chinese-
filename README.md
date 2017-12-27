@@ -25,6 +25,11 @@
 * [filterNonUnique](#filterNonUnique)
 * [flatten](#flatten)
 * [flattenDepth](#flattenDepth)
+* [groupBy](#groupBy)
+* [head](#head)
+* [initial](#initial)
+
+
 
 ## Array
 
@@ -199,7 +204,7 @@ const filterNonUnique = arr => arr.filter(element => arr.indexOf(element) === ar
 [回到目录](#目录)
 
 ### flatten
-二维数组降维。  
+二维数组降维。   
 使用扩展运算符给二维数组展开为一维数组。这是一种浅降维方法，上文有深度降维法[deepFlatten](#deepFlatten)。
 ```js
 const flatten = arr => [].concat(...arr);
@@ -220,4 +225,34 @@ const flattenDepth = (arr,depth = 1) =>
 ```
 [回到目录](#目录)
 
+### groupBy
+基于给定函数，给数组内的元素分组。  
+使用`Array.prototype.map()`方法，基于给定的函数或者属性来处理数组内的每个值。  
+使用`Array.prototype.reduce()`方法，把处理好的值放到创建好的对象里面，该对象的键名为`map()`处理后的值，键值为原数组的元素经过分组后的数组。  
+```js
+const groupBy = (arr,func) => 
+    arr.map(typeof func === 'function'? func : val => val[func]) //判断func是函数还是属性名
+    .reduce((acc,val,index) => { acc[val] = (acc[val] || []).concat(arr[index]); return acc; }, {});
+// groupBy([6.1, 4.2, 6.3], Math.floor) -> {4: [4.2], 6: [6.1, 6.3]}
+// groupBy(['one', 'two', 'three'], 'length') -> {3: ['one', 'two'], 5: ['three']}
+```
+[回到目录](#目录)
+
+### head
+返回一个列表的头元素。   
+使用`arr[0]`返回一个传入数组的第一个元素。   
+```js
+const head = arr => arr[0];
+// head([1,2,3]) -> 1
+```
+[回到目录](#目录)
+
+### initial
+返回一个数组除了最后一个元素的其他所有元素。   
+使用`Array.prototype.slice(0,-1)`方法来实现。   
+```js
+const initial = arr => arr.slice(0,-1);
+// initial([1,2,3]) -> [1,2]
+```
+[回到目录](#目录)
 
