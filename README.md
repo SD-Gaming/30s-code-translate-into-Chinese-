@@ -35,6 +35,8 @@
 * [last](#last)
 * [mapObject](#mapobject)
 * [nthElement](#nthelement)
+* [pick](#pick)
+
 
 
 ## Array
@@ -317,7 +319,7 @@ const mapObject = (arr,func) =>
 ```
 ```js
 const squareIt = arr => mapObject(arr, a => a*a);
-squareIt([1,2,3]) // { 1: 1, 2: 4, 3: 9 }
+// squareIt([1,2,3]) -> { 1: 1, 2: 4, 3: 9 }
 ```
 [回到目录](#目录)
 
@@ -327,8 +329,18 @@ squareIt([1,2,3]) // { 1: 1, 2: 4, 3: 9 }
 省略第二个参数时，就返回数组的第一个元素。       
 ```js
 const nthElement = (arr,n = 0) => (n > 0 ? arr.slice(n, n + 1) : arr.slice(n))[0];
-nthElement(['a','b','c'],1) // 'b'
-nthElement(['a','b','b'],-3) // 'a'
+// nthElement(['a','b','c'],1) -> 'b'
+// nthElement(['a','b','b'],-3) -> 'a'
+```
+[回到目录](#目录)
+
+### pick
+从给定的对象中，找出与给定键名相同的键值对。    
+使用`Array.prototype.slice`方法将删选/过滤的键转换为具有指定键值对的对象，如果这个键存在于给定的对象中。
+```js
+const pick = (obj,arr) =>
+    arr.reduce((acc, cur) => (cur in obj && (acc[cur] = obj[cur])), acc), {});
+// pick({ 'a': 1, 'b': '2', 'c': 3 }, ['a', 'c']) -> { 'a': 1, 'c': 3 }
 ```
 [回到目录](#目录)
 
