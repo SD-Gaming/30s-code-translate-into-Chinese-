@@ -315,7 +315,7 @@ const last = arr => arr[arr.length - 1];
 使用内部匿名函数来申明未定义的内存空间，用闭包来存储返回值。使用一个新数组以在其数据集上的函数映射一个数组和一个逗号操作符返回第二步，而无需从一个上下文转移到另一个上下文（由于闭包和操作顺序）。    
 ```js
 const mapObject = (arr,func) =>
-    (a => a = [arr, arr.map(fn)], a[0],reduce((acc,val,i) => (acc[val] = a[1][i],acc, {})))();
+    (a => a = [arr, arr.map(fn)], a[0],reduce((acc,val,i) => (acc[val] = a[1][i], acc), {})))();
 ```
 ```js
 const squareIt = arr => mapObject(arr, a => a*a);
