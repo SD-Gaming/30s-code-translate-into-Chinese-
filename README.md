@@ -8,33 +8,33 @@
 
 # 目录
 ## Array
-* [arrayGCD](#arrayGCD)
-* [arrayLCM](#arrayLCM)
-* [arrayMax](#arrayMax)
-* [arrayMin](#arrayMin)
+* [arrayGCD](#arraygcd)
+* [arrayLCM](#arraylcm)
+* [arrayMax](#arraymax)
+* [arrayMin](#arraymin)
 * [chunk](#chunk)
 * [compact](#compact)
-* [countOccurrences](#countOccurrences)
-* [deepFlatten](#deepFlatten)
+* [countOccurrences](#countoccurrences)
+* [deepFlatten](#deepflatten)
 * [difference](#difference)
-* [differenceWith](#differenceWith)
-* [distinceVlauesOfArray](#distinceVlauesOfArray)
-* [dropElements](#dropElments)
-* [dropRight](#dropRight)
-* [everyNth](#everyNth)
-* [filterNonUnique](#filterNonUnique)
+* [differenceWith](#differencewith)
+* [distinctValuesOfArray](#distinctvaluesofarray)
+* [dropElements](#dropelements)
+* [dropRight](#dropright)
+* [everyNth](#everynth)
+* [filterNonUnique](#filternonunique)
 * [flatten](#flatten)
-* [flattenDepth](#flattenDepth)
-* [groupBy](#groupBy)
+* [flattenDepth](#flattendepth)
+* [groupBy](#groupby)
 * [head](#head)
 * [initial](#initial)
-* [initialize2DArray](#initialize2DArray)
-* [initializeArrayWithValues](#initializeArrayWithValues)
-* [initializeArrayWithRange](#initializeArrayWithRange)
+* [initialize2DArray](#initialize2darray)
+* [initializeArrayWithValues](#initializearraywithvalues)
+* [initializeArrayWithRange](#initializearraywithrange)
 * [intersection](#intersection)
 * [last](#last)
-* [mapObject](#mapObject)
-* [nthElement](#nthElement)
+* [mapObject](#mapobject)
+* [nthElement](#nthelement)
 
 
 ## Array
@@ -132,11 +132,11 @@ const deepFlatten = arr => [].concat(...arr.map(val => Array.isArray(val) ? deep
 ```
 [回到目录](#目录)
 
-### different
+### difference
 比较两个数组，返回一个目标数组之中没有的元素的数组。  
 使用`Array.prototype.filter()`方法，把`arr`数组中有，而`target`数组中没有的元素返回出来。  
 ```js
-const diffrence = (arr,target) => {const targetSet = new Set(target);return arr.filter(val => !targetSet.has(val))};
+const difference = (arr,target) => {const targetSet = new Set(target);return arr.filter(val => !targetSet.has(val))};
 // difference([1,2,3], [1,2,4]) -> [3]
 ```
 [回到目录](#目录)
