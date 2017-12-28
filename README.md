@@ -30,8 +30,11 @@
 * [initial](#initial)
 * [initialize2DArray](#initialize2DArray)
 * [initializeArrayWithValues](#initializeArrayWithValues)
+* [initializeArrayWithRange](#initializeArrayWithRange)
 * [intersection](#intersection)
 * [last](#last)
+* [mapObject](#mapObject)
+* [nthElement](#nthElement)
 
 
 ## Array
@@ -302,6 +305,30 @@ const intersection = (a,b) => {const bSet = new Set(b); return a.filter(x => bSe
 ```js
 const last = arr => arr[arr.length - 1];
 // last([1,2,3]) -> 3
+```
+[回到目录](#目录)
+
+### mapObject
+使用给定函数把给定数组处理成一个特殊对象，这个对象的键名为数组的元素，键值为函数处理后的值。          
+使用内部匿名函数来申明未定义的内存空间，用闭包来存储返回值。使用一个新数组以在其数据集上的函数映射一个数组和一个逗号操作符返回第二步，而无需从一个上下文转移到另一个上下文（由于闭包和操作顺序）。    
+```js
+const mapObject = (arr,func) =>
+    (a => a = [arr, arr.map(fn)], a[0],reduce((acc,val,i) => (acc[val] = a[1][i],acc, {})))();
+```
+```js
+const squareIt = arr => mapObject(arr, a => a*a);
+squareIt([1,2,3]) // { 1: 1, 2: 4, 3: 9 }
+```
+[回到目录](#目录)
+
+### nthElement
+返回数组的第N个元素。        
+使用`Array.prototype.slice`方法取得数组包含第N个元素的位置，如索引的元素超过了数组范围则返回空数组。         
+省略第二个参数时，就返回数组的第一个元素。       
+```js
+const nthElement = (arr,n = 0) => (n > 0 ? arr.slice(n, n + 1) : arr.slice(n))[0];
+nthElement(['a','b','c'],1) // 'b'
+nthElement(['a','b','b'],-3) // 'a'
 ```
 [回到目录](#目录)
 
