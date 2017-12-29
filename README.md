@@ -36,6 +36,8 @@
 * [mapObject](#mapobject)
 * [nthElement](#nthelement)
 * [pick](#pick)
+* [pull](#pull)
+* [pullAtIndex](#pullatindex)
 
 
 
@@ -335,8 +337,8 @@ const nthElement = (arr,n = 0) => (n > 0 ? arr.slice(n, n + 1) : arr.slice(n))[0
 [回到目录](#目录)
 
 ### pick
-从给定的对象中，找出与给定键名相同的键值对。    
-使用`Array.prototype.slice`方法将删选/过滤的键转换为具有指定键值对的对象，如果这个键存在于给定的对象中。
+从给定的对象中，找出与给定键名相同的键值对。    
+使用`Array.prototype.slice`方法将需要筛选/过滤的键转换为具有指定键和值的对象，如果给定键名存在于给定的对象中的话。
 ```js
 const pick = (obj,arr) =>
     arr.reduce((acc, cur) => (cur in obj && (acc[cur] = obj[cur])), acc), {});
@@ -344,3 +346,45 @@ const pick = (obj,arr) =>
 ```
 [回到目录](#目录)
 
+### pull
+过滤掉指定的元素，把原数组进行异变。      
+使用`Array.prototype.filter()`和`Array.prototype.includes()`方法去掉不需要的元素。    
+使用`Array.length = 0`把原数组长度重置为0， 再使用`Array.prototype.push()`把需要的元素放入新数组。    
+```js
+const pull = (arr,...args) => {
+    let argState = Array.isArray(args[0])? args[0] : args;
+    let pulled = arr.filter((val,i) => !argState.includes(v));
+    arr.length = 0;
+    pulled.forEach(val => arr.push(val));
+    
+// let myArray1 = ['a', 'b', 'c', 'a', 'b', 'c'];
+// pull(myArray1, 'a', 'c');
+// console.log(myArray1); -> [ 'b', 'b' ]
+
+// let myArray2 = ['a', 'b', 'c', 'a', 'b', 'c'];
+// pull(myArray2, ['a', 'c']);
+// console.log(myArray2); -> [ 'b', 'b' ]
+```    
+[回到目录](#目录)
+
+### pullAtIndex
+删掉数组指定索引的元素，异化原数组。   
+使用`Array.prototype.filter()`和`Array.prototype.includes()`方法去掉不需要的元素。    
+使用`Array.length = 0`把原数组长度重置为0， 再使用`Array.prototype.push()`把需要的元素放入新数组。     
+```js
+const pullAtIndex = (arr, pullArr) => {
+  let removed = [];
+  let pulled = arr
+    .map((v, i) => (pullArr.includes(i) ? removed.push(v) : v))
+    .filter((v, i) => !pullArr.includes(i));
+  arr.length = 0;
+  pulled.forEach(v => arr.push(v));
+  return removed;
+};
+
+// let myArray = ['a', 'b', 'c', 'd'];
+// let pulled = pullAtIndex(myArray, [1, 3]);
+// console.log(myArray); -> [ 'a', 'c' ]
+// console.log(pulled); -> [ 'b', 'd' ]
+```
+[回到目录](#目录)
