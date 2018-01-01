@@ -38,7 +38,7 @@
 * [pick](#pick)
 * [pull](#pull)
 * [pullAtIndex](#pullatindex)
-
+* [pullAtValue](#pullatvalue)
 
 
 ## Array
@@ -368,9 +368,9 @@ const pull = (arr,...args) => {
 [回到目录](#目录)
 
 ### pullAtIndex
-删掉数组指定索引的元素，异化原数组。   
-使用`Array.prototype.filter()`和`Array.prototype.includes()`方法去掉不需要的元素。    
-使用`Array.length = 0`把原数组长度重置为0， 再使用`Array.prototype.push()`把需要的元素放入新数组。     
+移除数组指定索引的元素，异化原数组。   
+使用`Array.prototype.filter()`和`Array.prototype.includes()`方法移除掉不需要的元素。    
+使用`Array.length = 0`把原数组长度重置为0， 再使用`Array.prototype.push()`把需要的元素放入新数组，返回移除的元素。     
 ```js
 const pullAtIndex = (arr, pullArr) => {
   let removed = [];
@@ -388,3 +388,25 @@ const pullAtIndex = (arr, pullArr) => {
 // console.log(pulled); -> [ 'b', 'd' ]
 ```
 [回到目录](#目录)
+
+### pullAtValue
+移除数组中与指定值相同的元素，异化原数组并返回移除的元素。   
+使用`Array.prototype.filter()`和`Array.prototype.includes()`方法移除掉不需要的元素。   
+使用`Array.length = 0`把原数组长度重置为0， 再使用`Array.prototype.push()`把需要的元素放入新数组，返回移除的元素。   
+```js
+const pullAtIndex = (arr, pullArr) => {
+  let removed = [];
+  let pulled = arr
+    .map((v, i) => (pullArr.includes(i) ? removed.push(v) : v))
+    .filter((v, i) => !pullArr.includes(i));
+  arr.length = 0;
+  pulled.forEach(v => arr.push(v));
+  return removed;
+};
+// let myArray = ['a', 'b', 'c', 'd'];
+// let pulled = pullAtIndex(myArray, [1, 3]);
+// console.log(myArray); -> [ 'a', 'c' ]
+// console.log(pulled); -> [ 'b', 'd' ]
+```
+[回到目录](#目录)
+
