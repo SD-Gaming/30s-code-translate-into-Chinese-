@@ -39,6 +39,7 @@
 * [pull](#pull)
 * [pullAtIndex](#pullatindex)
 * [pullAtValue](#pullatvalue)
+* [quickSort](#quicksort)
 
 
 ## Array
@@ -407,6 +408,24 @@ const pullAtIndex = (arr, pullArr) => {
 // let pulled = pullAtIndex(myArray, [1, 3]);
 // console.log(myArray); -> [ 'a', 'c' ]
 // console.log(pulled); -> [ 'b', 'd' ]
+```
+[回到目录](#目录)
+
+### quickSort
+对数组快速排序，默认为升序。   
+使用递归。使用`Array.prototype.filter()`和扩展运算符创建一个新数组：比关键数小的书排在前面，比关键数小的排在后面。如果参数`desc`为`true`，则按照降序排列所有元素。   
+```js
+const quickSort = ([n,...nums],desc) =>
+  Number.isNaN(n)
+  ? []
+  : [
+      ...quickSort(nums.filter(v => (desc ? v > n : v <= n)), desc),
+      n,
+      ...quickSort(nums.filter(v => (!desc ? v > n : v <= n)), desc)
+    ];
+
+// quickSort([4, 1, 3, 2]); -> [1,2,3,4]
+// quickSort([4, 1, 3, 2], true); -> [4,3,2,1]
 ```
 [回到目录](#目录)
 
