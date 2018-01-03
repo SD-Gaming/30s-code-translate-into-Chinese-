@@ -41,6 +41,12 @@
 * [pullAtValue](#pullatvalue)
 * [quickSort](#quicksort)
 * [reducedFilter](#reducedfilter)
+* [sample](#sample)
+* [shuttle](#shuttle)
+* [sampleSize](#samplesize)
+* [similarity](#similarity)
+
+
 
 ## Array
 
@@ -430,3 +436,133 @@ const quickSort = ([n,...nums],desc) =>
 [回到目录](#目录)
 
 ### reducedFilter
+过滤出元素为对象的数组中满足条件的键。   
+使用`Array.prototype.filter()`方法过滤出数组中满足`fn`函数的元素。对这些元素使用`Array.prototype.map()`方法，把`keys`参数中指定的键以键值对的形式从元素中过滤出来并返回。   
+```js
+const reducedFilter = (data, keys, fn) =>
+    data.filter(fn).map(el =>
+        keys.reduce((acc, key) => {
+            acc[key] = el[key];
+            return acc;
+        }, {})
+    );
+```
+
+<details>
+    <summary>Examples</summary>
+
+```js
+const data = [
+  {
+    id: 1,
+    name: 'john',
+    age: 24
+  },
+  {
+    id: 2,
+    name: 'mike',
+    age: 50
+  }
+];
+reducedFilter(data, ['id', 'name'], item => item.age > 24); // [{ id: 2, name: 'mike'}]
+```
+
+</details>
+
+[回到目录](#目录)
+
+### sample
+从一个数组中提取随机一个元素。   
+使用`Math.random`生成随机数，与数组长度相乘再使用`Math.floor`方法向下取整，得到随机数的索引。   
+该方法对字符串同样有效。   
+```js
+const sample = arr => arr[Math.floor(Math.random() * arr.length)];
+```
+
+<details>
+    <summary>Examples</summary>
+    
+```js
+sample([3, 7, 9, 11]); // 9
+```
+
+</details>
+
+[回到目录](#目录)
+    
+### shuttle
+将数组打乱顺序，并返回出新数组。   
+使用`Fisher-Yates algorithm`（洗牌算法）给数组重新洗牌。   
+```js
+const shuffle = ([...arr]) => {
+  let m = arr.length;
+  while (m) {
+    const i = Math.floor(Math.random() * m--);
+    [arr[m], arr[i]] = [arr[i], arr[m]];
+  }
+  return arr;
+};
+```
+
+<details>
+    <summary>Examples</summary>
+    
+```js
+const foo = [1, 2, 3];
+shuffle(foo); // [2,3,1]
+console.log(foo); // [1,2,3]
+```
+
+</details>
+
+[回到目录](#目录)
+    
+### sampleSize
+获取数组中的`n`个随机元素，最大不超过数组的大小。   
+首先给数组重新*洗牌*。使用`Array.prototype.slice()`方法获取到`n`个随机元素。省略第二个参数则默认获取一个随机元素。   
+```js
+const sampleSize = ([...arr], n = 1) => {
+  let m = arr.length;
+  while (m) {
+    const i = Math.floor(Math.random() * m--);
+    [arr[m], arr[i]] = [arr[i], arr[m]];
+  }
+  return arr.slice(0, n);
+};
+```
+
+<details>
+    <summary>Examples</summary>
+    
+```js
+sampleSize([1, 2, 3], 2); // [3,1]
+sampleSize([1, 2, 3], 4); // [2,3,1]
+```
+
+</details>
+
+[回到目录](#目录)
+
+### similarity
+返回两个数组共有元素。   
+使用`Array.prototype.filter()`方法从第一个数组中过滤出第二个数组也拥有的元素(第二个数组采用`Array.prototype.includes()`方法判断是否拥有)。   
+```js
+const similarity = (arr,value) => arr.filter(v => value.includes(v));
+```
+
+<details>
+    <summary>Examples</summary>
+    
+```js
+similarity([1, 2, 3], [1, 2, 4]); // [1,2]
+```
+
+</details>
+
+[回到目录](#目录)
+
+
+    
+
+
+
