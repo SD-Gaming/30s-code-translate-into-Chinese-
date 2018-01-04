@@ -7,7 +7,7 @@
 *转载请注明原作者和译者。未完待续*
 
 # 目录
-## Array
+## 📚 Array
 * [arrayGCD](#arraygcd)
 * [arrayLCM](#arraylcm)
 * [arrayMax](#arraymax)
@@ -45,7 +45,17 @@
 * [shuttle](#shuttle)
 * [sampleSize](#samplesize)
 * [similarity](#similarity)
+* [sortedIndex](#sortedindex)
+* [symmetricDifference](#symmetricdifference)
+* [tail](#tail)
+* [take](#take)
+* [takeRight](#takeright)
+* [union](#union)
+* [without](#without)
+* [zip](#zip)
+* [zipObject](#zipobject)
 
+## 🌐 Browser
 
 
 ## Array
@@ -561,8 +571,170 @@ similarity([1, 2, 3], [1, 2, 4]); // [1,2]
 
 <br>[回到目录](#目录)
 
+### sortedIndex
+返回插入一个元素到数组中能够保持原有排序的索引值。   
+检查数组是否是降序排列。使用`Array.prototype.findIndex()`方法找到插入元素所在的位置。   
+```js
+const sortedIndex = (arr, n) => {
+    const isDescending = arr[0] > arr[arr.length - 1];
+    const index = arr.findIndex(el => (isDescending ? n > el : n <= el));
+    return index === -1 ? arr.length : index;
+};
+```
 
+<details>
+    <summary>Examples</summary>
     
+```js
+sortedIndex([5, 3, 2, 1], 4); // 1
+sortedIndex([30, 50], 40); // 1
+```
+
+</details>
+
+<br>[回到目录](#目录)
+
+### symmetricDifference
+返回两个数组中互不不相同的元素。  
+创建`Set`给两个数组去重，然后使用`Array.prototype.filter()`方法过滤出彼此都没有的元素集合。   
+```js
+const symmetricDifference = (a, b) => {
+    const sA = new Set(a),
+        sB = new Set(b);
+    return [...a.filter(x => !sB.has(x)),...b.filter(x => !sA.has(x))];
+|;
+```
+
+<details>
+    <summary>Examples</summary>
+    
+```js
+symmetricDifference([1, 2, 3], [1, 2, 4]); // [3,4]
+```
+
+</details>
+
+<br>[回到目录](#目录)
+
+### tail
+返回数组的第一个元素之外的其他元素。   
+当数组长度大于`1`时使用`arr.slice(1)`返回剩余元素的数组，当只有一个元素时，返回整个数组。  
+```js
+const tail = arr => (arr.length > 1 ? arr.slice(1) : arr);
+```
+
+<details>
+    <summary>Examples</summary>
+    
+```js
+tail([1, 2, 3]); // [2,3]
+tail([1]); // [1]
+```
+
+</details>
+
+<br>[回到目录](#目录)
+
+### take
+返回数组中的前`n`个元素。   
+使用`Array.prototype.slice()`方法切下前`n`个元素。   
+```js
+const take = (arr,n = 1) => arr.slice(0,n);
+```
+
+<details>
+    <summary>Examples</summary>
+    
+```js
+take([1, 2, 3], 5); // [1, 2, 3]
+take([1, 2, 3], 0); // []
+```
+
+</details>
+
+<br>[回到目录](#目录)
+
+### takeRight
+返回数组中的后`n`个元素。   
+使用`Array.prototype.slice()`方法切下后`n`个元素。  
+```js
+const takeRight = (arr,n = 1) => arr.slice(arr.length - n, arr.length);
+```
+
+<details>
+    <summary>Examples</summary>
+    
+```js
+takeRight([1, 2, 3], 2); // [ 2, 3 ]
+takeRight([1, 2, 3]); // [3]
+```
+
+</details>
+
+<br>[回到目录](#目录)
+
+### union
+返回两个数组的所有不重复元素。
+```js
+const union = (a, b) => Array.from(new Set([...a, ...b]));
+```
+
+<details>
+    <summary>Examples</summary>
+    
+```js
+union([1, 2, 3], [4, 3, 2]); // [1,2,3,4]
+```
+
+</details>
+
+<br>[回到目录](#目录)
+
+### without
+过滤出数组中非指定元素。   
+使用`Array.prototype.filter()`方法创建一个新数组，新数组内不含指定元素。   
+```js
+const without = (arr,...args) => arr.filter(v => !args.includes(v));
+```
+
+<details>
+    <summary>Examples</summary>
+    
+```js
+union([1, 2, 3], [4, 3, 2]); // [1,2,3,4]
+```
+
+</details>
+
+<br>[回到目录](#目录)
+
+### zip
+创建一个新数组，其元素基于原始数组的位置排列。   
+使用扩展操作符和`Math.max()`方法找到作为参数的数组的最大长度。创建一个数组，它的长度为参数数组的最大长度，它的元素为参数数组中对应位置的元素，并通过`Array.prototype.from()`方法转化为数组。   
+如果对应位置没有元素存在，则填充`undefined`。   
+```js
+const zip = (...arrays) => {
+    const maxLength = Math.max(...arrays.map(x => x.length));
+    return Array.from({ length: maxLength }).map((_, i) => {
+        return Array.from({l ength: arrays.length }, (_,k) => arrays[k][i]);
+    });
+};
+```
+
+<details>
+    <summary>Examples</summary>
+    
+```js
+zip(['a', 'b'], [1, 2], [true, false]); // [['a', 1, true], ['b', 2, false]]
+zip(['a'], [1, 2], [true, false]); // [['a', 1, true], [undefined, 2, false]]
+```
+
+</details>
+
+<br>[回到目录](#目录)
+
+### zipObject
+
 
 
 
