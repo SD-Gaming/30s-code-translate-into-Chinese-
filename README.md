@@ -734,7 +734,24 @@ zip(['a'], [1, 2], [true, false]); // [['a', 1, true], [undefined, 2, false]]
 <br>[回到目录](#目录)
 
 ### zipObject
+给定一个有效键名的数组和一个键值的数组，返回一个把属性名和属性值关联起来的对象。   
+因为对象的键值可以是`undefined`，键名不能是，所以用提供键名的数组使用`Array.prototype.reduce()`来决定结果对象的结构。   
+```js
+const zipObject = (props, values) =>
+  props.reduce((obj, prop, index) => ((obj[prop] = values[index]), obj), {});
+```
 
+<details>
+    <summary>Examples</summary>
+    
+```js
+zipObject(['a', 'b', 'c'], [1, 2]); // {a: 1, b: 2, c: undefined}
+zipObject(['a', 'b'], [1, 2, 3]); // {a: 1, b: 2}
+```
+
+</details>
+
+<br>[回到目录](#目录)
 
 
 
