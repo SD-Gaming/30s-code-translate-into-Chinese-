@@ -28,7 +28,7 @@
 * [groupBy](#groupby)
 * [head](#head)
 * [initial](#initial)
-* [indexOfAll](#indexOfAll)
+* [indexOfAll](#indexofall)
 * [initialize2DArray](#initialize2darray)
 * [initializeArrayWithValues](#initializearraywithvalues)
 * [initializeArrayWithRange](#initializearraywithrange)
@@ -310,6 +310,7 @@ everyNth([1, 2, 3, 4, 5, 6], 2); // [ 2, 4, 6 ]
 ```
 
 </details>
+
 <br>[回到目录](#目录)
 
 ### filterNonUnique
