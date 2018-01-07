@@ -28,10 +28,13 @@
 * [groupBy](#groupby)
 * [head](#head)
 * [initial](#initial)
+* [indexOfAll](#indexOfAll)
 * [initialize2DArray](#initialize2darray)
 * [initializeArrayWithValues](#initializearraywithvalues)
 * [initializeArrayWithRange](#initializearraywithrange)
 * [intersection](#intersection)
+* [isSorted](#issorted)
+* [join](#join)
 * [last](#last)
 * [mapObject](#mapobject)
 * [nthElement](#nthelement)
@@ -122,45 +125,90 @@ const arrayMin = arr => Math.min(...arr);
 ```js
 const chunk = (arr,size) => 
    Array.from({length: Math.ceil(arr.length / size)},(val,index) => arr.slice(index * size, index * size + size));
-//chunk([1,2,3,4,5],2) ->[[1,2],[3,4],[5]]
 ```
-[回到目录](#目录)
+
+<details>
+    <summary>Examples</summary>
+    
+```js
+chunk([1,2,3,4,5],2) // [[1,2],[3,4],[5]]
+```
+
+</details>
+
+<br>[回到目录](#目录)
 
 ### compact
 去除不需要的元素。  
 使用`Array.prototype.filter()`过滤掉不需要的元素（`null`,`undefined`,`""`,`false`,`NaN`）。
 ```js
 const compact = arr => arr.filter(Boolean);     //Boolean为布尔值对象包装器的函数指针
-// compact([0, 1, false, 2, '', 3, 'a', 'e'*23, NaN, 's', 34]) -> [ 1, 2, 3, 'a', 's', 34 ]
 ```
-[回到目录](#目录)
+
+<details>
+    <summary>Examples</summary>
+    
+```js
+compact([0, 1, false, 2, '', 3, 'a', 'e'*23, NaN, 's', 34]);   // [ 1, 2, 3, 'a', 's', 34 ]
+```
+
+</details>
+
+<br>[回到目录](#目录)
 
 ### countOccurrences
 对数组中出现相同元素个数进行计数。  
 使用`Array.prototype.filter()`，每当遇到数组中指定元素，则进行计数。   
 ```js
-const countOccurrences = (arr,val) => arr.reduce((accumulator,currentVal) => currentVal === val? accumulator + 1 : accumulator + 0, 0);    
-// countOccurrences([1,1,2,1,2,3], 1) -> 3 
+const countOccurrences = (arr,val) => arr.reduce((accumulator,currentVal) => currentVal === val? accumulator + 1 : accumulator + 0, 0); 
 ```
-[回到目录](#目录)
+
+<details>
+    <summary>Examples</summary>
+    
+```js
+countOccurrences([1,1,2,1,2,3], 1);   // 3
+```
+
+</details>
+
+<br>[回到目录](#目录)
 
 ### deepFlatten
 对数组降维。  
 使用递归。使用`Array.prototype.concat()`把空数组（`[]`）和使用扩展运算符（`...`）展开降维处理的数组。递归的降维入参数组中的每一个元素。  
 ```js
 const deepFlatten = arr => [].concat(...arr.map(val => Array.isArray(val) ? deepFlatten(val) : val));
-// deepFlatten([1,[2],[[3],4],5]) -> [1,2,3,4,5]
 ```
-[回到目录](#目录)
+
+<details>
+    <summary>Examples</summary>
+    
+```js
+deepFlatten([1, [2], [[3], 4], 5]); // [1,2,3,4,5]
+```
+
+</details>
+
+<br>[回到目录](#目录)
 
 ### difference
 比较两个数组，返回一个目标数组之中没有的元素的数组。  
 使用`Array.prototype.filter()`方法，把`arr`数组中有，而`target`数组中没有的元素返回出来。  
 ```js
 const difference = (arr,target) => {const targetSet = new Set(target);return arr.filter(val => !targetSet.has(val))};
-// difference([1,2,3], [1,2,4]) -> [3]
 ```
-[回到目录](#目录)
+
+<details>
+    <summary>Examples</summary>
+    
+```js
+difference([1, 2, 3], [1, 2, 4]); // [3]
+```
+
+</details>
+
+<br>[回到目录](#目录)
 
 ### differenceWith
 从一个数组过滤出比较函数没有返回`true`的所有值，作为数组返回。  
@@ -168,18 +216,35 @@ const difference = (arr,target) => {const targetSet = new Set(target);return arr
 ```js
 const differenceWith = (arr, val, comp) => arr.filer(arrElement => !val.find(valElment => copm(arrElement, valElment)))
 // 从arr数组中找出与val数组中使用四舍五入比较不相等的元素。
-// differenceWith([1, 1.2, 1.5, 3], [1.9, 3], (a,b) => Math.round(a) == Math.round(b)) -> [1, 1.2]
 ```
-[回到目录](#目录)
+
+<details>
+    <summary>Examples</summary>
+    
+```js
+differenceWith([1, 1.2, 1.5, 3, 0], [1.9, 3, 0], (a, b) => Math.round(a) === Math.round(b)); // [1, 1.2]
+```
+
+</details>
+
+<br>[回到目录](#目录)
 
 ### distinctValuesOfArray
 返回一个去除重复元素的新数组。  
 使用了ES6的`Set`和扩展语法（`...`）去除重复元素.  
 ```js
 const distinctValuesOfArray = arr => [...new Set(arr)];
-// distinctValuesOfArray([1,2,2,3,4,4,5]) -> [1,2,3,4,5]
 ```
-[回到目录](#目录)
+
+<details>
+<summary>Examples</summary>
+
+```js
+distinctValuesOfArray([1, 2, 2, 3, 4, 4, 5]); // [1,2,3,4,5]
+```
+
+</details>
+<br>[回到目录](#目录)
 
 ### dropElements
 去除掉一个数组内不满足条件函数的所有元素，并返回剩下的元素。  
@@ -191,9 +256,17 @@ const dropElements = (arr,fuc) => {
     } 
     return arr;
 };
-// dropElements([1, 2, 3, 4], n => n >= 3) -> [3,4]
 ```
-[回到目录](#目录)
+<details>
+<summary>Examples</summary>
+
+```js
+dropElements([1, 2, 3, 4], n => n >= 3); // [3,4]
+```
+
+</details>
+
+<br>[回到目录](#目录)
 
 ### dropRight
 返回一个移除`n`个右边元素的新数组。  
@@ -204,40 +277,75 @@ const dropRight = (arr, n = 1) => {
     if(n === 0) return arr;
     return arr.slice(0,-n);
 }
-//我加入了切掉0个数组的情况
-//dropRight([1,2,3], 0) -> []
-//dropRight([1,2,3]) -> [1,2]
-//dropRight([1,2,3], 2) -> [1]
-//dropRight([1,2,3], 42) -> []
 ```
-[回到目录](#目录)
+
+<details>
+<summary>Examples</summary>
+
+```js
+//我加入了切掉0个数组的情况
+dropRight([1,2,3], 0) -> []
+dropRight([1, 2, 3]); // [1,2]
+dropRight([1, 2, 3], 2); // [1]
+dropRight([1, 2, 3], 42); // []
+```
+
+</details>
+
+
+<br>[回到目录](#目录)
 
 ### everyNth
 返回数组内的N的倍数的元素。  
 使用`Array.prototype.filter()`方法包含给定数组的每一个N的倍数的元素的新数组。  
 ```js
 const everyNth = (arr,nth) => arr.filter((element,index) => index % nth === nth - 1);
-// everyNth([1,2,3,4,5,6], 2) -> [ 2, 4, 6 ]
 ```
-[回到目录](#目录)
+
+<details>
+<summary>Examples</summary>
+
+```js
+everyNth([1, 2, 3, 4, 5, 6], 2); // [ 2, 4, 6 ]
+```
+
+</details>
+<br>[回到目录](#目录)
 
 ### filterNonUnique
 过滤掉数组内所有非唯一元素，返回一个没有过重复元素的新数组。  
 使用`Array.prototype.filter()`方法返回一个只有唯一值的新数组。  
 ```js
 const filterNonUnique = arr => arr.filter(element => arr.indexOf(element) === arr.lastIndexOf(element));
-// filterNonUnique([1,2,2,3,4,4,5]) -> [1,3,5]
 ```
-[回到目录](#目录)
+<details>
+<summary>Examples</summary>
+
+```js
+filterNonUnique([1, 2, 2, 3, 4, 4, 5]); // [1,3,5]
+```
+
+</details>
+
+<br>[回到目录](#目录)
 
 ### flatten
 二维数组降维。   
 使用扩展运算符给二维数组展开为一维数组。这是一种浅降维方法，上文有深度降维法[deepFlatten](#deepFlatten)。
 ```js
 const flatten = arr => [].concat(...arr);
-// flatten([1,[2],3,4]) -> [1,2,3,4]
 ```
-[回到目录](#目录)
+
+<details>
+<summary>Examples</summary>
+
+```js
+flatten([1, [2], 3, 4]); // [1,2,3,4]
+```
+
+</details>
+
+<br>[回到目录](#目录)
 
 ### flattenDepth
 用给定的深度使数组降维。   
@@ -248,9 +356,17 @@ const flatten = arr => [].concat(...arr);
 const flattenDepth = (arr,depth = 1) =>
     depth != 1? arr.reduce((a, v) => a.concat(Array.isArray(v) ? flattenDepth(v, depth - 1) : v), [])
     : : arr.reduce((a, v) => a.concat(v), []);
-// flattenDepth([1,[2],[[[3],4],5]], 2) -> [1,2,[3],4,5]    
 ```
-[回到目录](#目录)
+<details>
+<summary>Examples</summary>
+
+```js
+flattenDepth([1, [2], 3, 4]); // [1,2,3,4]
+```
+
+</details>
+
+<br>[回到目录](#目录)
 
 ### groupBy
 基于给定函数，给数组内的元素分组。   
@@ -260,37 +376,94 @@ const flattenDepth = (arr,depth = 1) =>
 const groupBy = (arr,func) => 
     arr.map(typeof func === 'function'? func : val => val[func]) //判断func是函数还是属性名
     .reduce((acc,val,index) => { acc[val] = (acc[val] || []).concat(arr[index]); return acc; }, {});
-// groupBy([6.1, 4.2, 6.3], Math.floor) -> {4: [4.2], 6: [6.1, 6.3]}
-// groupBy(['one', 'two', 'three'], 'length') -> {3: ['one', 'two'], 5: ['three']}
 ```
-[回到目录](#目录)
+
+<details>
+<summary>Examples</summary>
+
+```js
+groupBy([6.1, 4.2, 6.3], Math.floor); // {4: [4.2], 6: [6.1, 6.3]}
+groupBy(['one', 'two', 'three'], 'length'); // {3: ['one', 'two'], 5: ['three']}
+```
+
+</details>
+
+<br>[回到目录](#目录)
 
 ### head
 返回一个列表的头元素。    
 使用`arr[0]`返回一个传入数组的第一个元素。    
 ```js
 const head = arr => arr[0];
-// head([1,2,3]) -> 1
 ```
-[回到目录](#目录)
+
+<details>
+<summary>Examples</summary>
+
+```js
+head([1, 2, 3]); // 1
+```
+
+</details>
+
+<br>[回到目录](#目录)
 
 ### initial
 返回一个数组除了最后一个元素的其他所有元素。    
 使用`Array.prototype.slice(0,-1)`方法来实现。    
 ```js
 const initial = arr => arr.slice(0,-1);
-// initial([1,2,3]) -> [1,2]
 ```
-[回到目录](#目录)
+<details>
+<summary>Examples</summary>
+
+```js
+initial([1, 2, 3]); // [1,2]
+```
+
+</details>
+<br>[回到目录](#目录)
+
+### indexOfAll
+返回数组中包含指定值的索引。如果指定值不存在则返回`[-1]`。
+使用 `Array.prototype.forEach()` 方法来遍历所有元素， 使用 `Array.push()` 方法来把找到的索引值储存起来。
+```js
+const indexOfAll = (arr, val) => {
+  const indices = [];
+  arr.forEach((el, i) => el === val && indices.push(i));
+  return indices.length ? indices : [-1];
+};
+```
+
+<details>
+<summary>Examples</summary>
+
+```js
+indexOfAll([1, 2, 3, 1, 2, 3], 1); // [0,3]
+indexOfAll([1, 2, 3], 4); // [-1]
+```
+
+</details>
+
+<br>[回到目录](#目录)
 
 ### initialize2DArray
 根据给定的元素长度，元素个数和元素值生成二维数组。       
 使用`Array.prototype.map()`方法生成`h`个长度为`w`、值为`val`的新数组，`val`默认值为`null`。    
 ```js
 const initialize2DArray = (w,h,val = null) => new Array(h).fill().map(() => new Array(w).fill(val));    // 为方便阅读加入了new操作符
-// initializeArrayWithRange(2, 2, 0) -> [[0,0], [0,0]]
 ```
-[回到目录](#目录)
+
+<details>
+<summary>Examples</summary>
+
+```js
+initialize2DArray(2, 2, 0); // [[0,0], [0,0]]
+```
+
+</details>
+
+<br>[回到目录](#目录)
 
 ### initializeArrayWithRange
 生成一个包含`start`和`end`且指定范围的新数组。    
@@ -299,35 +472,129 @@ const initialize2DArray = (w,h,val = null) => new Array(h).fill().map(() => new 
 ```js
 const initializeArrayWithRange = (end,start = 0) => 
     Array.from({ length:(end + 1) - start }).map((val,index) => index + start);
-// initializeArrayWithRange(5) -> [0,1,2,3,4,5]
-// initializeArrayWithRange(7, 3) -> [3,4,5,6,7]
 ```
-[回到目录](#目录)
+
+<details>
+<summary>Examples</summary>
+
+```js
+initializeArrayWithRange(5); // [0,1,2,3,4,5]
+initializeArrayWithRange(7, 3); // [3,4,5,6,7]
+initializeArrayWithRange(9, 0, 2); // [0,2,4,6,8]
+```
+
+</details>
+
+<br>[回到目录](#目录)
 
 ### initializeArrayWithValues
 生成指定长度和值的数组。    
 用构造函数`new Array()`生成指定长度的空数组，再用`Array.prototype.fill()`方法填充指定的值。默认填充值为0。     
 ```js
 const initializeArrayWithValues = (n,value = 0) => new Array(n).fill(value);
-// initializeArrayWithValues(5, 2) -> [2,2,2,2,2]
 ```
-[回到目录](#目录)
+
+<details>
+<summary>Examples</summary>
+
+```js
+initializeArrayWithValues(5, 2); // [2,2,2,2,2]
+```
+
+</details>
+
+<br>[回到目录](#目录)
+
 ### intersection
 返回两个数组都有的元素集合。      
 创建`b`的`Set`对象，挑选出`a`数组内跟`b`数组所有相同的元素。       
 ```js
 const intersection = (a,b) => {const bSet = new Set(b); return a.filter(x => bSet.has(x));};
-// intersection([1,2,3], [4,3,2]) -> [2,3]
 ```
-[回到目录](#目录)
+
+<details>
+<summary>Examples</summary>
+
+```js
+intersection([1, 2, 3], [4, 3, 2]); // [2,3]
+```
+
+</details>
+
+<br>[回到目录](#目录)
+
+
+### isSorted
+
+如果数组为升序排列返回`1`， 降序排列返回`-1`，除此之外返回`0`。
+计算出第一、第二个元素的排序方式。
+使用 `Object.prototype》entries()`方法遍历数组对象，比较它的键值对数组。    
+当真个数组顺序有变则返回`0`，或者遍历完成后顺序没有变化就返回数组顺序的代号。   
+```js
+const isSorted = arr => {
+  const direction = arr[0] > arr[1] ? -1 : 1;
+  for (let [i, val] of arr.entries())
+    if (i === arr.length - 1) return direction;
+    else if ((val - arr[i + 1]) * direction > 0) return 0;
+};
+```
+
+<details>
+<summary>Examples</summary>
+
+```js
+isSorted([0, 1, 2, 2]); // 1
+isSorted([4, 3, 2]); // -1
+isSorted([4, 3, 5]); // 0
+```
+
+</details>
+
+<br>[回到目录](#目录)
+
+### join
+连接数组的所有元素成为一个字符串，并返回它。   
+使用`Array.prototype.reduce()`方法连接数组元素成字符串。省略第二个参数则使用默认的分隔符`,`，省略第三个参数则使用同第二个参数相同的值。   
+```js
+const join = (arr, seprator = ',',  end = seprator) => 
+    arr.reduce(
+    (acc,val,i) =>
+        i === arr.length -2
+        ? acc + val + end
+        : i === arr.length - 1 ? acc + val : acc + val + seprator
+    ,''
+);
+```
+
+<details>
+    <summary>Examples</summary>
+    
+```js
+join(['pen', 'pineapple', 'apple', 'pen'], ',', '&'); // "pen,pineapple,apple&pen"
+join(['pen', 'pineapple', 'apple', 'pen'], ','); // "pen,pineapple,apple,pen"
+join(['pen', 'pineapple', 'apple', 'pen']); // "pen,pineapple,apple,pen"
+```
+
+</details>
+
+<br>[回到目录](#目录)
 
 ###  last
 返回数组最后一个元素。     
 ```js
 const last = arr => arr[arr.length - 1];
-// last([1,2,3]) -> 3
 ```
-[回到目录](#目录)
+
+<details>
+<summary>Examples</summary>
+
+```js
+last([1, 2, 3]); // 3
+```
+
+</details>
+
+<br>[回到目录](#目录)
 
 ### mapObject
 使用给定函数把给定数组处理成一个特殊对象，这个对象的键名为数组的元素，键值为函数处理后的值。          
@@ -338,9 +605,19 @@ const mapObject = (arr,func) =>
 ```
 ```js
 const squareIt = arr => mapObject(arr, a => a*a);
-// squareIt([1,2,3]) -> { 1: 1, 2: 4, 3: 9 }
 ```
-[回到目录](#目录)
+
+<details>
+<summary>Examples</summary>
+
+```js
+const squareIt = arr => mapObject(arr, a => a * a);
+squareIt([1, 2, 3]); // { 1: 1, 2: 4, 3: 9 }
+```
+
+</details>
+
+<br>[回到目录](#目录)
 
 ### nthElement
 返回数组的第N个元素。        
@@ -348,10 +625,19 @@ const squareIt = arr => mapObject(arr, a => a*a);
 省略第二个参数时，就返回数组的第一个元素。       
 ```js
 const nthElement = (arr,n = 0) => (n > 0 ? arr.slice(n, n + 1) : arr.slice(n))[0];
-// nthElement(['a','b','c'],1) -> 'b'
-// nthElement(['a','b','b'],-3) -> 'a'
 ```
-[回到目录](#目录)
+
+<details>
+<summary>Examples</summary>
+
+```js
+nthElement(['a', 'b', 'c'], 1); // 'b'
+nthElement(['a', 'b', 'b'], -3); // 'a'
+```
+
+</details>
+
+<br>[回到目录](#目录)
 
 ### pick
 从给定的对象中，找出与给定键名相同的键值对。    
@@ -359,9 +645,18 @@ const nthElement = (arr,n = 0) => (n > 0 ? arr.slice(n, n + 1) : arr.slice(n))[0
 ```js
 const pick = (obj,arr) =>
     arr.reduce((acc, cur) => (cur in obj && (acc[cur] = obj[cur])), acc), {});
-// pick({ 'a': 1, 'b': '2', 'c': 3 }, ['a', 'c']) -> { 'a': 1, 'c': 3 }
 ```
-[回到目录](#目录)
+
+<details>
+<summary>Examples</summary>
+
+```js
+pick({ a: 1, b: '2', c: 3 }, ['a', 'c']); // { 'a': 1, 'c': 3 }
+```
+
+</details>
+
+<br>[回到目录](#目录)
 
 ### pull
 过滤掉指定的元素，把原数组进行异变。      
@@ -373,16 +668,19 @@ const pull = (arr,...args) => {
     let pulled = arr.filter((val,i) => !argState.includes(v));
     arr.length = 0;
     pulled.forEach(val => arr.push(val));
-    
-// let myArray1 = ['a', 'b', 'c', 'a', 'b', 'c'];
-// pull(myArray1, 'a', 'c');
-// console.log(myArray1); -> [ 'b', 'b' ]
+```
 
-// let myArray2 = ['a', 'b', 'c', 'a', 'b', 'c'];
-// pull(myArray2, ['a', 'c']);
-// console.log(myArray2); -> [ 'b', 'b' ]
-```    
-[回到目录](#目录)
+<details>
+<summary>Examples</summary>
+
+```js
+let myArray = ['a', 'b', 'c', 'a', 'b', 'c'];
+pull(myArray, 'a', 'c'); // myArray = [ 'b', 'b' ]
+```
+
+</details>
+
+<br>[回到目录](#目录)
 
 ### pullAtIndex
 移除数组指定索引的元素，异化原数组。   
@@ -398,13 +696,19 @@ const pullAtIndex = (arr, pullArr) => {
   pulled.forEach(v => arr.push(v));
   return removed;
 };
-
-// let myArray = ['a', 'b', 'c', 'd'];
-// let pulled = pullAtIndex(myArray, [1, 3]);
-// console.log(myArray); -> [ 'a', 'c' ]
-// console.log(pulled); -> [ 'b', 'd' ]
 ```
-[回到目录](#目录)
+
+<details>
+<summary>Examples</summary>
+
+```js
+let myArray = ['a', 'b', 'c', 'd'];
+let pulled = pullAtIndex(myArray, [1, 3]); // myArray = [ 'a', 'c' ] , pulled = [ 'b', 'd' ]
+```
+
+</details>
+
+<br>[回到目录](#目录)
 
 ### pullAtValue
 移除数组中与指定值相同的元素，异化原数组并返回移除的元素。   
@@ -420,12 +724,19 @@ const pullAtIndex = (arr, pullArr) => {
   pulled.forEach(v => arr.push(v));
   return removed;
 };
-// let myArray = ['a', 'b', 'c', 'd'];
-// let pulled = pullAtIndex(myArray, [1, 3]);
-// console.log(myArray); -> [ 'a', 'c' ]
-// console.log(pulled); -> [ 'b', 'd' ]
 ```
-[回到目录](#目录)
+
+<details>
+<summary>Examples</summary>
+
+```js
+let myArray = ['a', 'b', 'c', 'd'];
+let pulled = pullAtValue(myArray, ['b', 'd']); // myArray = [ 'a', 'c' ] , pulled = [ 'b', 'd' ]
+```
+
+</details>
+
+<br>[回到目录](#目录)
 
 ### quickSort
 对数组快速排序，默认为升序。   
@@ -443,7 +754,7 @@ const quickSort = ([n,...nums],desc) =>
 // quickSort([4, 1, 3, 2]); -> [1,2,3,4]
 // quickSort([4, 1, 3, 2], true); -> [4,3,2,1]
 ```
-[回到目录](#目录)
+<br>[回到目录](#目录)
 
 ### reducedFilter
 过滤出元素为对象的数组中满足条件的键。   
