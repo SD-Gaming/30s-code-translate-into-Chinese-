@@ -42,7 +42,7 @@
 * [pull](#pull)
 * [pullAtIndex](#pullatindex)
 * [pullAtValue](#pullatvalue)
-* [quickSort](#quicksort)
+* [~quickSort(已移除)~](#quicksort)
 * [reducedFilter](#reducedfilter)
 * [sample](#sample)
 * [shuttle](#shuttle)
@@ -739,9 +739,10 @@ let pulled = pullAtValue(myArray, ['b', 'd']); // myArray = [ 'a', 'c' ] , pulle
 
 <br>[回到目录](#目录)
 
-### quickSort
+### ~~quickSort
 对数组快速排序，默认为升序。   
 使用递归。使用`Array.prototype.filter()`和扩展运算符创建一个新数组：比关键数小的数排在关键数前面，比关键数小的数排在关键数后面。如果参数`desc`为`true`，则按照降序排列所有元素。   
+由于作者觉得这个是个算法而不是有趣的技术，已经被移除。~~
 ```js
 const quickSort = ([n,...nums],desc) =>
   Number.isNaN(n)
