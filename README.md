@@ -625,9 +625,6 @@ last([1, 2, 3]); // 3
 const mapObject = (arr,func) =>
     (a => a = [arr, arr.map(fn)], a[0],reduce((acc,val,i) => (acc[val] = a[1][i], acc), {})))();
 ```
-```js
-const squareIt = arr => mapObject(arr, a => a*a);
-```
 
 <details>
 <summary>Examples</summary>
