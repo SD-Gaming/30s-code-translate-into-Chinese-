@@ -3,24 +3,11 @@
 
 *翻译的同时加入了自己的理解，难免有疏漏，请多指教*
 
-*转载请注明原作者和译者。*
+~~*Array部分全部完成，原作者在项目壮大后吸引了非常多的人参与，导致更新速度大大的超越我个人的翻译速度，因为想把整个月的时间用来继续看书，所以余下部分本月应该暂停更新，后续我还是希望有始有终，利用业余时间把整个项目翻译过来。*~~
 
-*Array部分全部完成，原作者在项目壮大后吸引了非常多的人参与，导致更新速度大大的超越我个人的翻译速度，因为想把整个月的时间用来继续看书，所以余下部分本月应该暂停更新，后续我还是希望有始有终，利用业余时间把整个项目翻译过来。*
+*美观大方的[中文版网站](http://www.css88.com/30-seconds-of-code/)已经出现了，可以直接去这里看*
 
 # 目录
-
-## 🔌 Adapter
-<details>
-<summary>未完成</summary>
-
-* [call](*call)
-* [collectInto](*collectinto)
-* [flip](*flip)
-* [pipeFunctions](*pipefunctions)
-* [promisify](*promisify)
-* [spreadOver](*spreadover)
-
-</details>    
 
 ## 📚 Array
 <details>
