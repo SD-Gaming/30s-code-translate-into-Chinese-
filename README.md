@@ -750,7 +750,7 @@ let pulled = pullAtValue(myArray, ['b', 'd']); // myArray = [ 'a', 'c' ] , pulle
 ~~由于作者觉得这个是个算法而不是有趣的技术，已经被移除。~~   
 ```js
 const quickSort = ([n,...nums],desc) =>
-  Number.isNaN(n)
+  isNaN(n)
   ? []
   : [
       ...quickSort(nums.filter(v => (desc ? v > n : v <= n)), desc),
